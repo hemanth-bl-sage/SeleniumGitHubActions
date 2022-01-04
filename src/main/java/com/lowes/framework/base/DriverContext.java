@@ -19,16 +19,11 @@ public class DriverContext {
         LocalDriverContext.getWebDriver().get(url);
         LocalDriverContext.getWebDriver().manage().window().maximize();
         LocalDriverContext.getWebDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-//        LocalDriverContext.getRemoteWebDriver().get(url);
-//        LocalDriverContext.getRemoteWebDriver().manage().window().maximize();
-//        LocalDriverContext.getRemoteWebDriver().manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
     }
 
     public static void WaitForPageToLoad() {
-//        WebDriverWait wait = new WebDriverWait(LocalDriverContext.getRemoteWebDriver(), 30);
         WebDriverWait wait = new WebDriverWait(LocalDriverContext.getWebDriver(), 30);
         JavascriptExecutor jsExecutor = (JavascriptExecutor)LocalDriverContext.getWebDriver();
-//        JavascriptExecutor jsExecutor = LocalDriverContext.getRemoteWebDriver();
         ExpectedCondition<Boolean> jsLoad = webDriver -> ((JavascriptExecutor) LocalDriverContext.getWebDriver())   //LocalDriverContext.getRemoteWebDriver()
                 .executeScript("return document.readyState").toString().equals("complete");
         //Get JS Ready

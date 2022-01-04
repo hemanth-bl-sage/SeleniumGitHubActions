@@ -1,5 +1,6 @@
 package com.lowes.framework.base;
 
+import com.lowes.framework.config.Settings;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -16,9 +17,18 @@ public class LocalDriverContext {
 //    }
 
     private static ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<>();
+    private static ThreadLocal<RemoteWebDriver> remoteWebDriverThreadLocal = new ThreadLocal<>();
 
-    public static WebDriver getWebDriver() {
-        return webDriverThreadLocal.get();
+//    public static WebDriver getWebDriver() {
+//        return webDriverThreadLocal.get();
+//    }
+
+    public static <T extends RemoteWebDriver & WebDriver> T getWebDriver() {
+        if (Settings.Execution.equalsIgnoreCase("local")){
+            return (T) webDriverThreadLocal.get();
+        }else {
+            return (T) remoteWebDriverThreadLocal.get();
+        }
     }
 
     static void setWebDriverThreadLocal(WebDriver driverThreadLocal) {
@@ -28,9 +38,9 @@ public class LocalDriverContext {
 //    public static RemoteWebDriver getWebDriver() {
 //        return webDriverThreadLocal.get();
 //    }
-//
-//    static void setWebDriverThreadLocal(RemoteWebDriver driverThreadLocal) {
-//        webDriverThreadLocal.set(driverThreadLocal);
-//    }
+
+    static void setWebDriverThreadLocal(RemoteWebDriver driverThreadLocal) {
+        remoteWebDriverThreadLocal.set(driverThreadLocal);
+    }
 
 }

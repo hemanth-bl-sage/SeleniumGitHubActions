@@ -39,8 +39,6 @@ public class TestInitialize extends FrameworkInitialize {
         Settings.Logs.Write("Test Cycle Created");
         InitializeBrowser(Settings.BrowserType);
         Settings.Logs.Write("Browser Initialized");
-//        DriverContext.Browser.GoToUrl(Settings.AUT);
-//        DriverContext.setDriver(Settings.Execution);
         DriverContext.GoToUrl(Settings.AUT);
         Settings.Logs.Write("Navigated to URL " + Settings.AUT);
 
@@ -53,7 +51,6 @@ public class TestInitialize extends FrameworkInitialize {
 
     @After
     public void tearDown(){
-//        LocalDriverContext.getRemoteWebDriver().close();
         LocalDriverContext.getWebDriver().close();
     }
 }
